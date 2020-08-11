@@ -56,8 +56,10 @@ do_install() {
     export_or_prefix
     if [ $(uname -m) = "aarch64" ]; then
         arch=arm64
+        echo $(arch)
     else
         arch=amd64
+        echo $(arch)
     fi
     export OPENRESTY_VERSION=1.17.8.1
     export OPENRESTY_PREFIX="/usr/local/openresty-debug"
@@ -122,6 +124,7 @@ do_install() {
 
     ls -l ./
     if [ ! -f "build-cache/grpc_server_example" ]; then
+        echo $(uname -m)
         wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-$(arch).tar.gz
         tar -xvf grpc_server_example-$(arch).tar.gz
         mv grpc_server_example build-cache/
