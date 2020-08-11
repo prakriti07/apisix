@@ -56,10 +56,10 @@ do_install() {
     export_or_prefix
     if [ "$(uname -m)" == "aarch64" ] 
     then
-        ARCH="arm64"
+        export ARCH="arm64"
         echo $(ARCH)
     else
-        ARCH="amd64"
+        export ARCH="amd64"
         echo $(ARCH)
     fi
     export OPENRESTY_VERSION=1.17.8.1
