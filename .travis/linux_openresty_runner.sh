@@ -58,7 +58,7 @@ do_install() {
         arch=arm64
         echo $(arch)
     else
-        arch=amd64
+        arch="amd64"
         echo $(arch)
     fi
     export OPENRESTY_VERSION=1.17.8.1
