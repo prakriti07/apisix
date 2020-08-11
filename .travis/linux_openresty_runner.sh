@@ -56,7 +56,7 @@ do_install() {
     export_or_prefix
     export OPENRESTY_VERSION=1.17.8.1
     export OPENRESTY_PREFIX="/usr/local/openresty-debug"
-    sudo apt-get -y install libpcre3-dev libssl-dev perl make build-essential curl zlib1g zlib1g-dev unzip
+    sudo apt-get -y install libpcre3-dev libssl-dev perl make build-essential curl zlib1g zlib1g-dev unzip git
     wget https://openresty.org/download/openresty-$OPENRESTY_VERSION.tar.gz
     tar zxf openresty-$OPENRESTY_VERSION.tar.gz
     cd openresty-$OPENRESTY_VERSION
@@ -141,6 +141,7 @@ do_install() {
 
 script() {
     export_or_prefix
+    export ETCD_UNSUPPORTED_ARCH="arm64"
     export PATH=$OPENRESTY_PREFIX/nginx/sbin:$OPENRESTY_PREFIX/luajit/bin:$OPENRESTY_PREFIX/bin:$PATH
     openresty -V
     sudo service etcd stop
