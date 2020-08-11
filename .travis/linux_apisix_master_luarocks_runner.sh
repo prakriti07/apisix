@@ -47,7 +47,8 @@ do_install() {
     sudo add-apt-repository -y ppa:longsleep/golang-backports
 
     sudo apt-get update
-    sudo apt-get install openresty-debug lua5.1 liblua5.1-0-dev
+    sudo apt-get install lua5.1 liblua5.1-0-dev
+    #sudo apt-get install openresty-debug lua5.1 liblua5.1-0-dev
 
     wget https://github.com/luarocks/luarocks/archive/v2.4.4.tar.gz
     tar -xf v2.4.4.tar.gz
