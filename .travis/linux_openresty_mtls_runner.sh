@@ -39,7 +39,23 @@ before_install() {
 
 do_install() {
     export_or_prefix
+    
+    export OPENRESTY_VERSION=1.15.8.3
+    export OPENRESTY_PREFIX="/usr/local/openresty-debug"
+    sudo apt-get -y install libpcre3-dev libssl-dev perl make build-essential curl zlib1g zlib1g-dev unzip
+    wget https://openresty.org/download/openresty-$OPENRESTY_VERSION.tar.gz
+    tar zxf openresty-$OPENRESTY_VERSION.tar.gz
+    cd openresty-$OPENRESTY_VERSION
+    ./configure --prefix=${OPENRESTY_PREFIX} -j4 > build.log 2>&1 || (cat build.log && exit 1)
+    make -j4 > build.log 2>&1 || (cat build.log && exit 1)
+    sudo PATH=$PATH make install > build.log 2>&1 || (cat build.log && exit 1)
 
+    cd ..
+
+    mkdir -p build-cache${OPENRESTY_PREFIX}
+    cp -r ${OPENRESTY_PREFIX}/* build-cache${OPENRESTY_PREFIX}
+    ls build-cache${OPENRESTY_PREFIX}
+    rm -rf openresty-${OPENRESTY_VERSION}
     wget -qO - https://openresty.org/package/pubkey.gpg | sudo apt-key add -
     sudo apt-get -y update --fix-missing
     sudo apt-get -y install software-properties-common
@@ -47,7 +63,7 @@ do_install() {
     sudo add-apt-repository -y ppa:longsleep/golang-backports
 
     sudo apt-get update
-    sudo apt-get install openresty-debug lua5.1 liblua5.1-0-dev
+    sudo apt-get install lua5.1 liblua5.1-0-dev
 
     wget https://github.com/luarocks/luarocks/archive/v2.4.4.tar.gz
     tar -xf v2.4.4.tar.gz
