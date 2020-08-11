@@ -88,5 +88,3 @@ jobs:
                   bash -c "apt-get -q update &&
                   apt-get install -yq sudo wget cpanminus build-essential libncurses5-dev libreadline-dev libssl-dev perl etcd &&
                   sudo ./.travis/${{ matrix.os_name }}_runner.sh before_install
-                  sudo ./.travis/${{ matrix.os_name }}_runner.sh do_install
-                  sudo ./.travis/${{ matrix.os_name }}_runner.sh script
