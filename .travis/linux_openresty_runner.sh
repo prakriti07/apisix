@@ -54,14 +54,14 @@ before_install() {
 
 do_install() {
     export_or_prefix
-    if [ "$(uname -m)" == "aarch64" ] 
-    then
-        export ARCH="arm64"
-        echo $(ARCH)
-    else
-        export ARCH="amd64"
-        echo $(ARCH)
-    fi
+    #if [ "$(uname -m)" == "aarch64" ]
+    #then
+    #    export ARCH="arm64"
+    #    echo $(ARCH)
+    #else
+    #    export ARCH="amd64"
+    #    echo $(ARCH)
+    #fi
     export OPENRESTY_VERSION=1.17.8.1
     export OPENRESTY_PREFIX="/usr/local/openresty-debug"
     sudo apt-get -y install libpcre3-dev libssl-dev perl make build-essential curl zlib1g zlib1g-dev unzip git lsof
@@ -125,9 +125,10 @@ do_install() {
 
     ls -l ./
     if [ ! -f "build-cache/grpc_server_example" ]; then
-        echo $(uname -m)
-        wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-$(ARCH).tar.gz
-        tar -xvf grpc_server_example-$(ARCH).tar.gz
+        echo $_uname -a)
+        echo $(arch)
+        wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-arm64.tar.gz
+        tar -xvf grpc_server_example-arm64.tar.gz
         mv grpc_server_example build-cache/
     fi
 
@@ -142,8 +143,8 @@ do_install() {
     fi
 
     if [ ! -f "build-cache/grpcurl" ]; then
-        wget https://github.com/api7/grpcurl/releases/download/20200314/grpcurl-$(ARCH).tar.gz
-        tar -xvf grpcurl-$(ARCH).tar.gz
+        wget https://github.com/api7/grpcurl/releases/download/20200314/grpcurl-arm64.tar.gz
+        tar -xvf grpcurl-arm64.tar.gz
         mv grpcurl build-cache/
     fi
 }
