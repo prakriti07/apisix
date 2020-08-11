@@ -63,8 +63,8 @@ tengine_install() {
         return
     fi
 
-    sudo apt-get -y install libpcre3-dev libssl-dev perl make build-essential curl zlib1g zlib1g-dev unzip
-    export OPENRESTY_VERSION=1.17.8.1
+    sudo apt-get -y install libpcre3-dev libssl-dev perl make build-essential curl zlib1g zlib1g-dev unzip git
+    export OPENRESTY_VERSION=1.15.8.3
     wget https://openresty.org/download/openresty-$OPENRESTY_VERSION.tar.gz
     tar zxf openresty-$OPENRESTY_VERSION.tar.gz
     wget https://codeload.github.com/alibaba/tengine/tar.gz/2.3.2
