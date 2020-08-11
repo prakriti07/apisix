@@ -62,3 +62,33 @@ jobs:
 #       - name: MacOS After success
 #         if: matrix.platform == 'macos-latest'
 #         run: ./.travis/${{ matrix.os_name }}_runner.sh after_success
+  build-arm64:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-18.04]
+        os_name: [linux_openresty, linux_tengine, linux_apisix_master_luarocks, linux_apisix_current_luarocks, linux_openresty_mtls]
+    runs-on: ${{ matrix.platform }}
+    env:
+      SERVER_NAME: ${{ matrix.os_name }}
+    steps:
+        - name: Checkout repo
+          uses: actions/checkout@v2
+        
+        - name: Enable qemu
+          run: |
+            docker run --rm --privileged hypriot/qemu-register
+        - name: outside docker
+          run: |     
+            docker run -v /var/run/docker.sock:/var/run/docker.sock --name apisix docker sh
+        - name: Run tests
+          uses: docker://arm64v8/ubuntu:bionic
+          with:
+            args: |
+                  bash -c "apt-get -q update &&
+                  apt-get install -yq sudo wget cpanminus build-essential libncurses5-dev libreadline-dev libssl-dev perl etcd &&
+                  wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/arm64/docker-ce-cli_19.03.9~3-0~ubuntu-bionic_arm64.deb &&
+                  sudo dpkg -i docker-ce-cli_19.03.9~3-0~ubuntu-bionic_arm64.deb
+                  sudo ./.travis/${{ matrix.os_name }}_runner.sh before_install
+                  sudo ./.travis/${{ matrix.os_name }}_runner.sh do_install
+                  sudo ./.travis/${{ matrix.os_name }}_runner.sh script
