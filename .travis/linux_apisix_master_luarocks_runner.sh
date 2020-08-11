@@ -24,6 +24,21 @@ export_or_prefix() {
 }
 
 do_install() {
+    export OPENRESTY_VERSION=1.15.8.3
+    sudo apt-get -y install libpcre3-dev libssl-dev perl make build-essential curl zlib1g zlib1g-dev unzip
+    wget https://openresty.org/download/openresty-$OPENRESTY_VERSION.tar.gz
+    tar zxf openresty-$OPENRESTY_VERSION.tar.gz
+    cd openresty-$OPENRESTY_VERSION
+    ./configure --prefix=${OPENRESTY_PREFIX} -j2 > build.log 2>&1 || (cat build.log && exit 1)
+    make -j4 > build.log 2>&1 || (cat build.log && exit 1)
+    sudo PATH=$PATH make install > build.log 2>&1 || (cat build.log && exit 1)
+
+    cd ..
+
+    mkdir -p build-cache${OPENRESTY_PREFIX}
+    cp -r ${OPENRESTY_PREFIX}/* build-cache${OPENRESTY_PREFIX}
+    ls build-cache${OPENRESTY_PREFIX}
+    rm -rf openresty-${OPENRESTY_VERSION}
     wget -qO - https://openresty.org/package/pubkey.gpg | sudo apt-key add -
     sudo apt-get -y update --fix-missing
     sudo apt-get -y install software-properties-common
