@@ -78,9 +78,9 @@ jobs:
         - name: Enable qemu
           run: |
             docker run --rm --privileged hypriot/qemu-register
-        - name: outside docker
-          run: |     
-            docker run -v /var/run/docker.sock:/var/run/docker.sock --name apisix docker sh
+        #- name: outside docker
+        #  run: |     
+        #    docker run -v /var/run/docker.sock:/var/run/docker.sock --name apisix docker sh
         - name: Run tests
           uses: docker://arm64v8/ubuntu:bionic
           with:
