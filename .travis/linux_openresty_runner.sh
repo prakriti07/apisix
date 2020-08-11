@@ -56,11 +56,11 @@ do_install() {
     export_or_prefix
     if [ "$(uname -m)" == "aarch64" ] 
     then
-        arch="arm64"
-        echo $(arch)
+        ARCH="arm64"
+        echo $(ARCH)
     else
-        export arch="amd64"
-        echo $(arch)
+        ARCH="amd64"
+        echo $(ARCH)
     fi
     export OPENRESTY_VERSION=1.17.8.1
     export OPENRESTY_PREFIX="/usr/local/openresty-debug"
@@ -126,8 +126,8 @@ do_install() {
     ls -l ./
     if [ ! -f "build-cache/grpc_server_example" ]; then
         echo $(uname -m)
-        wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-$(arch).tar.gz
-        tar -xvf grpc_server_example-$(arch).tar.gz
+        wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-$(ARCH).tar.gz
+        tar -xvf grpc_server_example-$(ARCH).tar.gz
         mv grpc_server_example build-cache/
     fi
 
@@ -142,8 +142,8 @@ do_install() {
     fi
 
     if [ ! -f "build-cache/grpcurl" ]; then
-        wget https://github.com/api7/grpcurl/releases/download/20200314/grpcurl-$(arch).tar.gz
-        tar -xvf grpcurl-$(arch).tar.gz
+        wget https://github.com/api7/grpcurl/releases/download/20200314/grpcurl-$(ARCH).tar.gz
+        tar -xvf grpcurl-$(ARCH).tar.gz
         mv grpcurl build-cache/
     fi
 }
