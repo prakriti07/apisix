@@ -24,7 +24,7 @@ export_or_prefix() {
 }
 
 do_install() {
-    export OPENRESTY_VERSION=1.15.8.3
+    export OPENRESTY_VERSION=1.17.8.1
     export OPENRESTY_PREFIX="/usr/local/openresty-debug"
     sudo apt-get -y install libpcre3-dev libssl-dev perl make build-essential curl zlib1g zlib1g-dev unzip
     wget https://openresty.org/download/openresty-$OPENRESTY_VERSION.tar.gz
