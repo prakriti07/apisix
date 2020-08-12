@@ -32,7 +32,7 @@ do_install() {
     cd openresty-$OPENRESTY_VERSION
     ./configure --prefix=${OPENRESTY_PREFIX} --with-debug --with-http_stub_status_module --with-http_realip_module --with-http_v2_module -j4 > build.log 2>&1 || (cat build.log && exit 1)
     make -j4 > build.log 2>&1 || (cat build.log && exit 1)
-    sudo PATH=$PATH make install > build.log 2>&1 || (cat build.log && exit 1)
+    sudo PATH=$PATH make install -j4 > build.log 2>&1 || (cat build.log && exit 1)
 
     cd ..
 
