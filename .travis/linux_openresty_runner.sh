@@ -146,8 +146,8 @@ do_install() {
     fi
 
     if [ ! -f "build-cache/grpcurl" ]; then
-        go get github.com/api7/grpcurl
-        go install -pkgdir build-cache/grpcurl github.com/api7/grpcurl/cmd/grpcurl
+        go get github.com/fullstorydev/grpcurl
+        go install -pkgdir build-cache/grpcurl github.com/fullstorydev/grpcurl/cmd/grpcurl
         #wget -O grpcurl.tar.gz https://github.com/api7/grpcurl/archive/20200314.tar.gz
         #tar -xvf grpcurl.tar.gz
         #cd grpcurl-20200314/
