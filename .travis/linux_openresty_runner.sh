@@ -127,9 +127,12 @@ do_install() {
     if [ ! -f "build-cache/grpc_server_example" ]; then
         echo $(uname -a)
         echo $(arch)
-        wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-arm64.tar.gz
-        tar -xvf grpc_server_example-arm64.tar.gz
-        mv grpc_server_example build-cache/
+        wget -O grpc_server_example.tag.gz https://github.com/iresty/grpc_server_example/archive/20200314.tar.gz
+        #wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-arm64.tar.gz
+        tar -xvf grpc_server_example.tar.gz
+        cd grpc_server_example-20200314/
+        go build -o build-cache/grpc_server_example main.go
+        #mv grpc_server_example build-cache/
     fi
 
     if [ ! -f "build-cache/proto/helloworld.proto" ]; then
@@ -143,9 +146,13 @@ do_install() {
     fi
 
     if [ ! -f "build-cache/grpcurl" ]; then
-        wget https://github.com/api7/grpcurl/releases/download/20200314/grpcurl-arm64.tar.gz
-        tar -xvf grpcurl-arm64.tar.gz
-        mv grpcurl build-cache/
+        wget -O grpcurl.tar.gz https://github.com/api7/grpcurl/archive/20200314.tar.gz
+        tar -xvf grpcurl.tar.gz
+        cd grpcurl-20200314/
+        go build -o build-cache/grpcurl cmd/grpcurl/
+        #wget https://github.com/api7/grpcurl/releases/download/20200314/grpcurl-arm64.tar.gz
+        #tar -xvf grpcurl-arm64.tar.gz
+        #mv grpcurl build-cache/
     fi
 }
 
