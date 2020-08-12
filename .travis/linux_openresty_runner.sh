@@ -70,7 +70,7 @@ do_install() {
     cd openresty-$OPENRESTY_VERSION
     ./configure --prefix=${OPENRESTY_PREFIX} --with-debug --with-http_stub_status_module --with-http_realip_module --with-http_v2_module -j4 > build.log 2>&1 || (cat build.log && exit 1)
     make -j4 > build.log 2>&1 || (cat build.log && exit 1)
-    sudo PATH=$PATH make install > build.log 2>&1 || (cat build.log && exit 1)
+    sudo PATH=$PATH make install -j4 > build.log 2>&1 || (cat build.log && exit 1)
 
     cd ..
 
@@ -127,7 +127,7 @@ do_install() {
     if [ ! -f "build-cache/grpc_server_example" ]; then
         echo $(uname -a)
         echo $(arch)
-        wget -O grpc_server_example.tag.gz https://github.com/iresty/grpc_server_example/archive/20200314.tar.gz
+        wget -O grpc_server_example.tar.gz https://github.com/iresty/grpc_server_example/archive/20200314.tar.gz
         #wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-arm64.tar.gz
         tar -xvf grpc_server_example.tar.gz
         cd grpc_server_example-20200314/
