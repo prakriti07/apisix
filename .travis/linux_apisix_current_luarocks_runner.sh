@@ -53,7 +53,7 @@ do_install() {
     cd luarocks-2.4.4
     ./configure --prefix=/usr > build.log 2>&1 || (cat build.log && exit 1)
     make build > build.log 2>&1 || (cat build.log && exit 1)
-    sudo make install > build.log 2>&1 || (cat build.log && exit 1)
+    sudo make install -j4 > build.log 2>&1 || (cat build.log && exit 1)
     cd ..
     rm -rf luarocks-2.4.4
 }
