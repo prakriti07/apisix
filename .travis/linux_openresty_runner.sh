@@ -154,7 +154,7 @@ do_install() {
         wget -O grpcurl.tar.gz https://github.com/fullstorydev/grpcurl/archive/v1.7.0.tar.gz
         tar -xvf grpcurl.tar.gz
         cd grpcurl-1.7.0
-        go build -o grpcurl cmd/grpcurl
+        go build -o grpcurl cmd/grpcurl/
         mv grpcurl ../
         cd ..
         
