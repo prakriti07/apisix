@@ -127,15 +127,16 @@ do_install() {
     if [ ! -f "build-cache/grpc_server_example" ]; then
         echo $(uname -a)
         echo $(arch)
-        go get github.com/iresty/grpc_server_example
-        go install src/github.com/iresty/grpc_server_example/main.go
-        mv bin/grpc_server_example build-cache/
-        #wget -O grpc_server_example.tar.gz https://github.com/iresty/grpc_server_example/archive/20200314.tar.gz
+        #go get github.com/iresty/grpc_server_example
+        #go install src/github.com/iresty/grpc_server_example/main.go
+        #mv bin/grpc_server_example build-cache/
+        wget -O grpc_server_example.tar.gz https://github.com/iresty/grpc_server_example/archive/20200314.tar.gz
         #wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-arm64.tar.gz
-        #tar -xvf grpc_server_example.tar.gz
-        #cd grpc_server_example-20200314/
-        #go build -o grpc_server_example main.go
-        mv grpc_server_example build-cache/
+        tar -xvf grpc_server_example.tar.gz
+        cd grpc_server_example-20200314/
+        go build -o grpc_server_example main.go
+        cd ..
+        mv ../grpc_server_example build-cache/
     fi
 
     if [ ! -f "build-cache/proto/helloworld.proto" ]; then
