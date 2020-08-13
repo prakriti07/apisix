@@ -129,6 +129,7 @@ do_install() {
         echo $(arch)
         wget -O grpc_server_example.tar.gz https://github.com/iresty/grpc_server_example/archive/20200314.tar.gz
         #wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-arm64.tar.gz
+        mkdir grpc_server_example
         tar -C grpc_server_example -xvf grpc_server_example.tar.gz
         cd grpc_server_example/
         go build -o build-cache/grpc_server_example main.go
