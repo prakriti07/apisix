@@ -135,8 +135,9 @@ do_install() {
         tar -xvf grpc_server_example.tar.gz
         cd grpc_server_example-20200314/
         go build -o grpc_server_example main.go
+        mv grpc_server_example ../
         cd ..
-        mv ../grpc_server_example build-cache/
+        mv grpc_server_example build-cache/
     fi
 
     if [ ! -f "build-cache/proto/helloworld.proto" ]; then
