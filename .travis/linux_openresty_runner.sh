@@ -128,7 +128,7 @@ do_install() {
         echo $(uname -a)
         echo $(arch)
         go get github.com/iresty/grpc_server_example
-        go install src/github.com/iresty/grpc_server_example
+        go install src/github.com/iresty/grpc_server_example/main.go
         mv bin/grpc_server_example build-cache/
         #wget -O grpc_server_example.tar.gz https://github.com/iresty/grpc_server_example/archive/20200314.tar.gz
         #wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-arm64.tar.gz
