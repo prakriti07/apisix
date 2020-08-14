@@ -5,6 +5,21 @@ matrix:
   allow_failures:
     - os: osx
   include:
+    - os: linux
+      arch: arm64
+      env: OSNAME=linux_openresty
+    - os: linux
+      arch: arm64
+      env: OSNAME=linux_tengine
+    - os: linux
+      arch: arm64
+      env: OSNAME=linux_apisix_master_luarocks
+    - os: linux
+      arch: arm64
+      env: OSNAME=linux_apisix_current_luarocks
+    - os: linux
+      arch: arm64
+      env: OSNAME=linux_openresty_mtls   
     - os: osx
       env: OSNAME=osx_openresty
       cache:
