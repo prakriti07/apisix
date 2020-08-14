@@ -78,6 +78,12 @@ jobs:
         - name: Enable qemu
           run: |
             docker run --rm --privileged hypriot/qemu-register
+        - name: Cache multiple paths
+          uses: actions/cache@v2
+          with:
+            path: |
+             build-cache/usr/local/openresty-debug
+            key: ${{ runner.os }}-${{ hashFiles('.travis/**_runner.sh') }}
         #- name: outside docker
         #  run: |     
         #    docker run -v /var/run/docker.sock:/var/run/docker.sock --name apisix docker sh
@@ -91,10 +97,6 @@ jobs:
                   sudo dpkg -i docker-ce-cli_19.03.9~3-0~ubuntu-bionic_arm64.deb &&
                   sudo apt-get -y install golang-go &&
                   sudo go version
-                  wget https://dl.google.com/go/go1.12.linux-arm64.tar.gz &&
-                  sudo tar -xvf go1.12.linux-arm64.tar.gz &&
-                  sudo mv go /usr/local &&
-                  export GOROOT=/usr/local/go &&
-                  export GOPATH=/home/runner/work/apisix/apisix &&
-                  export PATH=$GOPATH/bin:$GOROOT/bin:$PATH &&
-                  go version
+                  sudo ./.travis/${{ matrix.os_name }}_runner.sh before_install &&
+                  sudo ./.travis/${{ matrix.os_name }}_runner.sh do_install &&
+                  sudo ./.travis/${{ matrix.os_name }}_runner.sh script"
