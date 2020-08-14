@@ -54,18 +54,18 @@ before_install() {
 
 do_install() {
     export_or_prefix
-    #if [ "$(uname -m)" == "aarch64" ]
-    #then
-    #    export ARCH="arm64"
-    #    echo $(ARCH)
-    #else
-    #    export ARCH="amd64"
-    #    echo $(ARCH)
-    #fi
+    if [ $(arch) == "aarch64" ]; then
+        wget https://dl.google.com/go/go1.13.linux-arm64.tar.gz
+        sudo tar -xvf go1.13.linux-arm64.tar.gz
+        sudo mv go /usr/local
+        export GOROOT=/usr/local/go
+        export GOPATH=/github/workspace
+        export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+        go version
+    fi
     export OPENRESTY_VERSION=1.17.8.1
     export OPENRESTY_PREFIX="/usr/local/openresty-debug"
     sudo apt-get -y install libpcre3-dev libssl-dev perl make build-essential curl zlib1g zlib1g-dev unzip git lsof
-    if [ ! -f "build-cache${OPENRESTY_PREFIX}" ]; then
     wget https://openresty.org/download/openresty-$OPENRESTY_VERSION.tar.gz
     tar zxf openresty-$OPENRESTY_VERSION.tar.gz
     cd openresty-$OPENRESTY_VERSION
@@ -79,7 +79,6 @@ do_install() {
     cp -r ${OPENRESTY_PREFIX}/* build-cache${OPENRESTY_PREFIX}
     ls build-cache${OPENRESTY_PREFIX}
     rm -rf openresty-${OPENRESTY_VERSION}
-    fi
     wget -qO - https://openresty.org/package/pubkey.gpg | sudo apt-key add -
     sudo apt-get -y update --fix-missing
     sudo apt-get -y install software-properties-common
