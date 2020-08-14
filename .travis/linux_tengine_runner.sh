@@ -272,9 +272,12 @@ do_install() {
     ls -l ./
 
     if [ ! -f "build-cache/grpc_server_example" ]; then
-        wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-amd64.tar.gz
-        tar -xvf grpc_server_example-amd64.tar.gz
-        mv grpc_server_example build-cache/
+        git clone https://github.com/iresty/grpc_server_example
+        cd grpc_server_example
+        go build -o ../build-cache/grpc_server_example main.go
+        #wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-amd64.tar.gz
+        #tar -xvf grpc_server_example-amd64.tar.gz
+        #mv grpc_server_example build-cache/
     fi
 }
 
