@@ -159,8 +159,12 @@ do_install() {
     fi
 
     if [ ! -f "build-cache/grpcurl" ]; then
-        go get github.com/fullstorydev/grpcurl/...
-        go install github.com/fullstorydev/grpcurl/cmd/grpcurl
+        git clone https://github.com/fullstorydev/grpcurl
+        cd grpcurl/cmd/grpcurl/
+        go build -o ../../../build-cache/grpcurl
+        cd ../../../
+        #go get github.com/fullstorydev/grpcurl/...
+        #go install github.com/fullstorydev/grpcurl/cmd/grpcurl
         whereis grpcurl
         #wget -O grpcurl.tar.gz https://github.com/fullstorydev/grpcurl/archive/v1.7.0.tar.gz
         #tar -xvf grpcurl.tar.gz
@@ -168,7 +172,6 @@ do_install() {
         #go build -o grpcurl cmd/grpcurl/
         #mv grpcurl ../
         #cd ..
-        
         #go get github.com/fullstorydev/grpcurl/...
         #go install src/github.com/fullstorydev/grpcurl/cmd/grpcurl
         #wget -O grpcurl.tar.gz https://github.com/api7/grpcurl/archive/20200314.tar.gz
@@ -176,7 +179,7 @@ do_install() {
         #cd grpcurl-20200314/
         #wget https://github.com/api7/grpcurl/releases/download/20200314/grpcurl-arm64.tar.gz
         #tar -xvf grpcurl-arm64.tar.gz
-        mv $(GOROOT)/bin/grpcurl build-cache/
+        #mv $(GOROOT)/bin/grpcurl build-cache/
     fi
 }
 
