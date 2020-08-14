@@ -226,7 +226,6 @@ tengine_install() {
 
 do_install() {
     export_or_prefix
-    
     if [ $(arch) == "aarch64" ]; then
         wget https://dl.google.com/go/go1.13.linux-arm64.tar.gz
         sudo tar -xvf go1.13.linux-arm64.tar.gz
