@@ -212,9 +212,9 @@ tengine_install() {
         --add-dynamic-module=bundle/tengine-2.3.2/modules/ngx_slab_stat \
         > build.log 2>&1 || (cat build.log && exit 1)
 
-    make > build.log 2>&1 || (cat build.log && exit 1)
+    make -j4 > build.log 2>&1 || (cat build.log && exit 1)
 
-    sudo PATH=$PATH make install > build.log 2>&1 || (cat build.log && exit 1)
+    sudo PATH=$PATH make install -j4 > build.log 2>&1 || (cat build.log && exit 1)
 
     cd ..
 
@@ -292,6 +292,7 @@ do_install() {
 script() {
     export_or_prefix
     export PATH=$OPENRESTY_PREFIX/nginx/sbin:$OPENRESTY_PREFIX/luajit/bin:$OPENRESTY_PREFIX/bin:$PATH
+    export ETCD_UNSUPPORTED_ARCH="arm64"
     openresty -V
     sudo service etcd stop
     mkdir -p ~/etcd-data
