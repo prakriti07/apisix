@@ -126,12 +126,6 @@ do_install() {
     cp .travis/ASF* .travis/openwhisk-utilities/scancode/
 
     ls -l ./
-    wget https://dl.google.com/go/go1.12.linux-arm64.tar.gz
-    sudo tar -xvf go1.12.linux-arm64.tar.gz
-    sudo mv go /usr/local
-    export GOROOT=/usr/local/go
-    export GOPATH=/home/runner/work/apisix/apisix
-    export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
     if [ ! -f "build-cache/grpc_server_example" ]; then
         echo $(uname -a)
         echo $(arch)
