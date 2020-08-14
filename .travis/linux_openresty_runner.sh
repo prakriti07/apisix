@@ -138,10 +138,10 @@ do_install() {
         #wget https://github.com/iresty/grpc_server_example/releases/download/20200314/grpc_server_example-arm64.tar.gz
         #tar -xvf grpc_server_example.tar.gz
         #cd grpc_server_example-20200314/
-        go build -o grpc_server_example main.go
-        mv grpc_server_example ../
+        go build -o ../build-cache/grpc_server_example main.go
+        #mv grpc_server_example ../
         cd ..
-        mv grpc_server_example build-cache/
+        #mv grpc_server_example build-cache/
     fi
 
     if [ ! -f "build-cache/proto/helloworld.proto" ]; then
