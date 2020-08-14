@@ -202,7 +202,9 @@ script() {
         echo "failed: APISIX runs repeatedly"
         exit 1
     fi
-
+    echo $(ps aux | grep apisix)
+    echo $(ps aux | grep apisix | grep nginx)
+    echo $(ps aux | grep apisix | grep nginx | awk '{print $2})
     #kill apisix
     sudo kill -9 `ps aux | grep apisix | grep nginx | awk '{print $2}'`
 
