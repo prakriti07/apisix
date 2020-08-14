@@ -226,7 +226,16 @@ tengine_install() {
 
 do_install() {
     export_or_prefix
-
+    
+    if [ $(arch) == "aarch64" ]; then
+        wget https://dl.google.com/go/go1.13.linux-arm64.tar.gz
+        sudo tar -xvf go1.13.linux-arm64.tar.gz
+        sudo mv go /usr/local
+        export GOROOT=/usr/local/go
+        export GOPATH=/github/workspace
+        export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+        go version
+    fi
     sudo apt-get -y update --fix-missing
     sudo apt-get -y install software-properties-common
     sudo add-apt-repository -y ppa:longsleep/golang-backports
