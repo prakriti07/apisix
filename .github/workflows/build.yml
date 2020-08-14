@@ -95,8 +95,6 @@ jobs:
                   apt-get install -yq sudo wget cpanminus build-essential libncurses5-dev libreadline-dev libssl-dev perl etcd &&
                   wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/arm64/docker-ce-cli_19.03.9~3-0~ubuntu-bionic_arm64.deb &&
                   sudo dpkg -i docker-ce-cli_19.03.9~3-0~ubuntu-bionic_arm64.deb &&
-                  sudo apt-get -y install golang-go &&
-                  sudo go version
                   sudo ./.travis/${{ matrix.os_name }}_runner.sh before_install &&
                   sudo ./.travis/${{ matrix.os_name }}_runner.sh do_install &&
                   sudo ./.travis/${{ matrix.os_name }}_runner.sh script"
