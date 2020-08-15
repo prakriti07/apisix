@@ -92,7 +92,7 @@ jobs:
           with:
             args: |
                   bash -c "apt-get -q update &&
-                  apt-get install -yq sudo wget cpanminus build-essential libncurses5-dev libreadline-dev libssl-dev perl etcd &&
+                  apt-get install -yq sudo wget cpanminus build-essential libncurses5-dev libreadline-dev libssl-dev perl etcd unzip &&
                   apt-get -y install nginx
                   wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/arm64/docker-ce-cli_19.03.9~3-0~ubuntu-bionic_arm64.deb &&
                   sudo dpkg -i docker-ce-cli_19.03.9~3-0~ubuntu-bionic_arm64.deb &&
