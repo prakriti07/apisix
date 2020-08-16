@@ -69,7 +69,7 @@ do_install() {
     wget https://openresty.org/download/openresty-$OPENRESTY_VERSION.tar.gz
     tar zxf openresty-$OPENRESTY_VERSION.tar.gz
     cd openresty-$OPENRESTY_VERSION
-    ./configure --prefix=${OPENRESTY_PREFIX} --with-debug --with-http_stub_status_module --with-http_realip_module --with-http_v2_module --with-pcre-jit -j4 > build.log 2>&1 || (cat build.log && exit 1)
+    ./configure --prefix=${OPENRESTY_PREFIX} --with-debug --with-http_stub_status_module --with-http_realip_module --with-http_v2_module --with-pcre-jit --without-lua_cjson -j4 > build.log 2>&1 || (cat build.log && exit 1)
     make -j4 > build.log 2>&1 || (cat build.log && exit 1)
     sudo PATH=$PATH make install -j4 > build.log 2>&1 || (cat build.log && exit 1)
 
