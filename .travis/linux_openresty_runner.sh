@@ -69,7 +69,7 @@ do_install() {
     wget https://openresty.org/download/openresty-$OPENRESTY_VERSION.tar.gz
     tar zxf openresty-$OPENRESTY_VERSION.tar.gz
     cd openresty-$OPENRESTY_VERSION
-    ./configure --prefix=${OPENRESTY_PREFIX} --with-debug --with-http_stub_status_module --with-http_realip_module --with-http_v2_module --with-pcre-jit --without-lua_cjson -j4 > build.log 2>&1 || (cat build.log && exit 1)
+    ./configure --prefix=${OPENRESTY_PREFIX} --with-debug --with-http_stub_status_module --with-http_realip_module --with-http_v2_module --with-pcre-jit -j4 > build.log 2>&1 || (cat build.log && exit 1)
     make -j4 > build.log 2>&1 || (cat build.log && exit 1)
     sudo PATH=$PATH make install -j4 > build.log 2>&1 || (cat build.log && exit 1)
 
@@ -188,6 +188,7 @@ script() {
     /usr/bin/etcd --listen-client-urls 'http://0.0.0.0:2379' --advertise-client-urls='http://0.0.0.0:2379' --data-dir ~/etcd-data > /dev/null 2>&1 &
     etcd --version
     sleep 5
+    sudo luarocks remove cjson
 
     ./build-cache/grpc_server_example &
 
