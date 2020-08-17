@@ -182,6 +182,7 @@ script() {
     export_or_prefix
     export ETCD_UNSUPPORTED_ARCH="arm64"
     export PATH=$OPENRESTY_PREFIX/nginx/sbin:$OPENRESTY_PREFIX/luajit/bin:$OPENRESTY_PREFIX/bin:$PATH
+    $OPENRESTY_PREFIX/nginx start
     openresty -V
     sudo service etcd stop
     mkdir -p ~/etcd-data
